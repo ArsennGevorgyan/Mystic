@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+<h1>Reservation</h1>
+{% if not request.user.is_authenticated %}
+<h2>if you want to reserve a table, please register /login account before that</h2>
+{% else %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Reserve</button>
+</form>
+{% endif %}
+    </div>
+
+{% endblock %}

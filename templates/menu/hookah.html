@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<html lang="en">
+
+<body>
+
+<section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>Our Hookahs</h2>
+            <p>See Our <span>Hookahs List</span></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="table-responsive">
+                    <!-- Add a class to the table -->
+                    <table class="table table-striped light-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hookah in hookahs %}
+                                <tr>
+                                    <td><h4>{{ hookah.name }}</h4></td>
+                                    <td><h4>{{ hookah.price }} Amd</h4></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

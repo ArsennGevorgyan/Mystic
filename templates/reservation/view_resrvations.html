@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <h2>Your Reservations</h2>
+  <ul>
+    {% for reservation in user_reservations %}
+      <li>
+        {{ reservation.reserved_tabel.table_number }} {{ reservation.start_date }}
+        {% if not reservation.is_cancelled %}
+          - <a href="{% url 'reservation:cancel_reservation' reservation.id %}">Cancel</a>
+        {% else %}
+          - Canceled
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

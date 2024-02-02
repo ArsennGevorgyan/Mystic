@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<html lang="en">
+
+<body>
+
+<section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>Our Menu</h2>
+
+            <p>Check Our <span>MysticCloud Menu</span></p>
+        </div>
+
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            {% for category in categories %}
+            <li class="nav-item">
+                <a class="nav-link {% if forloop.first %}active show{% endif %}" data-bs-toggle="tab"
+                   data-bs-target="#menu-{{ category.name|lower }}">
+                    <h4>{{ category.name }}</h4>
+                </a>
+            </li><!-- End tab nav item -->
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+
+            {% for category in categories %}
+            <div class="tab-pane fade " id="menu-{{ category.name|lower }}">
+
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>{{ category.name }}</h3>
+                </div>
+
+                <div class="row gy-5">
+                    {% for item in category.menu_items.all %}
+                    <div class="col-lg-4 menu-item">
+                        {% if item.image %}
+                        <a href="{{ item.image.url }}" class="glightbox">
+                            <img src="{{ item.image.url }}" class="menu-img img-fluid" alt="{{ item.name }}">
+                        </a>
+                        {% endif %}
+                        <h4>{{ item.name }}</h4>
+                        <p class="ingredients">{{ item.description }}</p>
+                        <p class="price">{{ item.price }} Amd</p>
+                    </div><!-- Menu Item -->
+                    {% endfor %}
+
+                    <!-- Display bar items for "Bar" category -->
+                  {% if category.name == "Bar" %}
+                    {% for bar_item in bar_categories %}
+                    <div class="col-lg-4 menu-item">
+                        <h3><a href="{% url 'menu:bar_item_detail' pk=bar_item.pk %}">
+                                {{ bar_item.name }}</a></h3></div>
+                    <!-- Bar Menu Item -->
+                    {% endfor %}
+                  {% endif %}
+
+                </div>
+            </div><!-- End Menu Content -->
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section><!-- End Menu Section -->
+
+</body>
+
+{% endblock %}
