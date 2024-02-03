@@ -16,6 +16,7 @@ class HomeView(TemplateView):
         context['hookahs'] = Hookah.objects.all()
         context['events'] = Events.objects.all()
         context['our_chefs'] = Chef.objects.all()
+        context['gallery_images'] = Gallery.objects.all()
         return context
 
 

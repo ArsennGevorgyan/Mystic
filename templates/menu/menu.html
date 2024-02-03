@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+<br>
+<br>
+<br>
 
 <html lang="en">
 
@@ -40,7 +44,9 @@
                     <div class="col-lg-4 menu-item">
                         {% if item.image %}
                         <a href="{{ item.image.url }}" class="glightbox">
-                            <img src="{{ item.image.url }}" class="menu-img img-fluid" alt="{{ item.name }}">
+                            <img src="{% if item.image %}{{ item.image.url }}{% else %}
+                                {% static 'img/no_image.jpg' %}{% endif %}"
+                                 class="menu-img img-fluid" alt="{{ item.name }}">
                         </a>
                         {% endif %}
                         <h4>{{ item.name }}</h4>
@@ -50,14 +56,14 @@
                     {% endfor %}
 
                     <!-- Display bar items for "Bar" category -->
-                    {% if category.name == "Bar" %}
+                  {% if category.name == "Bar" %}
                     {% for item in bar_categories %}
                     <div class="col-lg-4 menu-item">
                         <h3><a href="{% url 'menu:bar_item_detail' pk=item.pk %}">
-                            {{ item.name }}</a></h3></div>
+                                {{ item.name }}</a></h3></div>
                     <!-- Bar Menu Item -->
                     {% endfor %}
-                    {% endif %}
+                  {% endif %}
 
                 </div>
             </div><!-- End Menu Content -->
@@ -67,8 +73,7 @@
 
     </div>
 </section><!-- End Menu Section -->
-{%block body%}
-                {%endblock%}
+
 </body>
 
 {% endblock %}

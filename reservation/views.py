@@ -1,5 +1,4 @@
-from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, ListView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
@@ -45,23 +44,15 @@ class AllReservationsView(ListView):
     template_name = 'reservation/view_reservations.html'
     context_object_name = 'user_reservations'
 
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
     def get_queryset(self):
         return Reservation.objects.filter(user=self.request.user)
 
 
-class CancelReservationView(DeleteView):
-    model = Reservation
-    success_url = reverse_lazy('reservation:view_reservations')
-
-    def post(self, request, *args, **kwargs):
-        reservation = self.get_object()
-        if request.user == reservation.user:
-            reservation.delete()
-            messages.success(request, "Your reservation has been canceled successfully!")
-            return redirect("reservation:view_reservations")
-        else:
-            messages.error(request, "You do not have permission to cancel this reservation.")
-            return redirect("reservation:view_reservations")
+@login_required
+def cancel_reservation(request, reservation_id):
+    reservation = Reservation.objects.get(pk=reservation_id)
+    if request.user == reservation.user:
+        reservation.delete()
+        messages.success(request, "Your reservation delete !")
+        return redirect("reservation:view_reservations")
+    return render(request, 'reservation/reservation')

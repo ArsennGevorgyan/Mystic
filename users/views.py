@@ -5,32 +5,16 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, FormView, CreateView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 from django.contrib.auth.views import LoginView as Login
 from django.conf import settings
-from .forms import EmailForm, RegistrationForm, ProfileForm
+from .forms import RegistrationForm, ProfileForm
 from django.contrib.auth import get_user_model, logout
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from .generate_token import account_activation_token
-from .tasks import send_simple_email
 
 User = get_user_model()
-
-
-class EmailView(FormView):
-    template_name = "users/send_email.html"
-    form_class = EmailForm
-    success_url = "/"
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        email = form.cleaned_data['email']
-        subject = form.cleaned_data['subject']
-        body = form.cleaned_data['body']
-        send_simple_email.apply_async(kwargs={"body": body, "subject": subject,
-                                              "email": email})
-        return response
 
 
 class RegistrationView(CreateView):
@@ -100,7 +84,7 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         messages.info(self.request, "User updated successfully!")
-        return reverse("users:update_user", kwargs={"pk": self.object.pk})
+        return reverse("users:update_profile", kwargs={"pk": self.object.pk})
 
     def form_valid(self, form):
         result = super().form_valid(form)

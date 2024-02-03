@@ -1,10 +1,10 @@
 #header {
     background: #3d443d;
-    color: #black;
+    color: #fff;
 }
 
 #branding h1 {
-    color: #black;
+    color: #fff;
 }
 
 div.breadcrumbs {
@@ -16,7 +16,7 @@ div.breadcrumbs {
 }
 
 a:link, a:visited {
-    color: #black;
+    color: #151313;
 
 }
 
