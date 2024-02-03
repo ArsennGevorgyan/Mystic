@@ -11,7 +11,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['menu_items'] = MenuItem.objects.all()
+        context['menu_items'] = MenuItem.objects.select_related("category").all()
         context['bar_categories'] = BarCategory.objects.all()
         context['hookahs'] = Hookah.objects.all()
         context['events'] = Events.objects.all()
@@ -23,44 +23,9 @@ class HomeView(TemplateView):
 class AboutUsView(TemplateView):
     template_name = 'home/about.html'
 
-    def get(self, request, *args, **kwargs):
-        about = AboutUs.objects.all()
-        why_choose_us = WhyChooseUs.objects.all()
-        chef = Chef.objects.all()
-
-        context = {
-            'about': about,
-            'why_choose_us': why_choose_us,
-            'chef': chef,
-        }
-
-        return render(request, self.template_name, context)
-
 
 class ContactUsView(TemplateView):
     template_name = 'home/contact_us.html'
-
-    def get(self, request, *args, **kwargs):
-        contact_info = ContactUs.objects.all()
-
-        context = {
-            'contact_info': contact_info,
-        }
-
-        return render(request, self.template_name, context)
-
-
-class EventsUsView(TemplateView):
-    template_name = "home/events.html"
-
-    def get(self, request, *args, **kwargs):
-        contact_info = ContactUs.objects.all()
-
-        context = {
-            'events_info': contact_info,
-        }
-
-        return render(request, self.template_name, context)
 
 
 class ChefUsView(View):
