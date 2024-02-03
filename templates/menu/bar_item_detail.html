@@ -1,26 +1,23 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends 'menu/menu.html' %}
 
-<html lang="en">
+{% block body %}
+<!--  {{ block.super }} {# Include the content from the parent block #}-->
 
-<body>
-
-<div class="tab-content" data-aos="fade-up" data-aos-delay="300">
-    {% for item in bar_category_items %}
-    <div class="row gy-5">
-        <div class="col-lg-4 menu-item">
-            <a href="{{ item.image.url }}" class="glightbox">
-                <img src="{% if item.image %}{{ item.image.url }}{% endif %}" class="menu-img img-fluid" alt="{{ item.name }}">
-            </a>
-            <h4>{{ item.name }}</h4>
-            <p class="ingredients">{{ item.description }}</p>
-            <p class="price">{{ item.price }} Amd</p>
+  <div class="row">
+    {% for bar_item in bar_items %}
+      <div class="col-md-4 mb-4">
+        <div class="item-card">
+          {% if bar_item.image %}
+            <img src="{{ bar_item.image.url }}" alt="{{ bar_item.name }}" class="item-img img-fluid">
+          {% endif %}
+          <div class="item-details">
+            <h2>{{ bar_item.name }}</h2>
+            <p class="item-description">{{ bar_item.description }}</p>
+            <p class="item-price">Price: ${{ bar_item.price }}</p>
+          </div>
         </div>
-        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 
-    </div>
-</div>
-
-</body>
-</html>
 {% endblock %}

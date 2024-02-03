@@ -30,12 +30,6 @@ class MenuItem(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='menu_items')
-    slug = models.SlugField(blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug and self.name:
-            self.slug = slugify(self.name)
-        super(MenuItem, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -50,12 +44,6 @@ class BarItem(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(BarCategory, on_delete=models.CASCADE,
                                  related_name='bar_items')
-    slug = models.SlugField(blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name) if self.name else slugify(self.category)
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

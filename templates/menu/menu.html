@@ -50,14 +50,14 @@
                     {% endfor %}
 
                     <!-- Display bar items for "Bar" category -->
-                  {% if category.name == "Bar" %}
-                    {% for bar_item in bar_categories %}
+                    {% if category.name == "Bar" %}
+                    {% for item in bar_categories %}
                     <div class="col-lg-4 menu-item">
-                        <h3><a href="{% url 'menu:bar_item_detail' pk=bar_item.pk %}">
-                                {{ bar_item.name }}</a></h3></div>
+                        <h3><a href="{% url 'menu:bar_item_detail' pk=item.pk %}">
+                            {{ item.name }}</a></h3></div>
                     <!-- Bar Menu Item -->
                     {% endfor %}
-                  {% endif %}
+                    {% endif %}
 
                 </div>
             </div><!-- End Menu Content -->
@@ -67,7 +67,8 @@
 
     </div>
 </section><!-- End Menu Section -->
-
+{%block body%}
+                {%endblock%}
 </body>
 
 {% endblock %}
