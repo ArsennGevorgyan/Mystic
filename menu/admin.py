@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from menu.models import MenuItem, BarItem, Category, BarCategory, Hookah
+from .models import MenuItem, BarItem, Category, BarCategory, Hookah
 from django.templatetags.static import static
 
 

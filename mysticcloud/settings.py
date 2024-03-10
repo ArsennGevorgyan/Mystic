@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'debug_toolbar',
-    'django_celery_beat',
-    'django_celery_results',
     'menu.apps.MenuConfig',
     'users.apps.UserConfig',
     'home.apps.HomeConfig',
@@ -159,8 +157,5 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# CELERY SETTINGS
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = 'django-db'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

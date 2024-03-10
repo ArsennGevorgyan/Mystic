@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from home.models import AboutUs, Chef, WhyChooseUs, ContactUs, FollowUs, Gallery, Events
+from .models import AboutUs, Chef, WhyChooseUs, ContactUs, FollowUs, Gallery, Events
 
 from django.templatetags.static import static
 

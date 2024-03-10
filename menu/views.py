@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView, ListView
-from menu.models import Category, BarItem, BarCategory, Hookah
+from .models import Category, BarItem, BarCategory, Hookah
 
 
 class MenuListView(ListView):
     template_name = "menu/menu.html"
-    context_object_name = 'categories'  # This sets the variable name in the template
+    context_object_name = 'categories'
 
     def get_queryset(self):
         return Category.objects.prefetch_related("menu_items", "bar_category_items").all()
@@ -19,7 +19,7 @@ class MenuListView(ListView):
 
 class BarListView(ListView):
     template_name = "menu/menu.html"
-    context_object_name = 'bar_categories'  #
+    context_object_name = 'bar_categories'
 
     def get_queryset(self):
         return BarCategory.objects.prefetch_related("bar_items").all()

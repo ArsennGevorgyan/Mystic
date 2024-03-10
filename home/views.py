@@ -1,7 +1,7 @@
 from django.views import View
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render
-from home.models import AboutUs, WhyChooseUs, Chef, ContactUs, Gallery, Events
+from .models import Chef, Gallery, Events
 from menu.models import Category, MenuItem, BarCategory, Hookah
 
 

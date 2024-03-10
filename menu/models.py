@@ -1,6 +1,4 @@
 from django.db import models
-from django.urls import reverse
-from django.utils.text import slugify
 
 from helpers.media_upload import upload_menu_item_images, upload_bar_item_images
 
@@ -44,9 +42,6 @@ class BarItem(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(BarCategory, on_delete=models.CASCADE,
                                  related_name='bar_items')
-
-    def __str__(self):
-        return self.name
 
     def __str__(self):
         return self.name
